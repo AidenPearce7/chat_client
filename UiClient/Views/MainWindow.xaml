@@ -1,0 +1,26 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:UiClient.ViewModels;assembly=UiClient"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="UiClient.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="{Binding Title}">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="800,Auto" RowDefinitions="400,Auto">
+                
+                
+        <ListBox Items="{Binding DisplayedMessages}" Name="Messages" Grid.Row="0" Grid.Column="0" Focusable="False" IsEnabled="False"></ListBox>
+        <ListBox Items="{Binding Rooms}" Name="Rooms" Grid.Row="0" Grid.Column="1" SelectionMode="AlwaysSelected" SelectedItem="{Binding CurrentRoom}"></ListBox>
+                
+        <TextBox Text="{Binding Message}" Grid.Row="1" Grid.Column="0" Watermark="Message..." BorderThickness="1"></TextBox>
+        <Button Name="Button" Grid.Row="1" Grid.Column="1" Command="{Binding $parent[Window].DataContext.SendMessage}" IsEnabled="{Binding ConnectionActive}">Send Message</Button>
+                
+    </Grid>
+
+</Window>
